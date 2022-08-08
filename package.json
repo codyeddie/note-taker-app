@@ -1,22 +1,26 @@
 {
-  "name": "note-taker",
+  "name": "note-taker-app",
   "version": "1.0.0",
-  "description": "a note taking app",
+  "description": "a note taker app ",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "directories": {
+    "lib": "lib"
   },
-  "author": "codyeddie",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.1"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codyeddie/note-taker-app.git"
   },
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/codyeddie/note-taker-app/issues"
   },
-  "homepage": "https://github.com/codyeddie/note-taker-app#readme"
+  "homepage": "https://github.com/codyeddie/note-taker-app#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }

@@ -1,13 +1,14 @@
-// importing our depencies and needed modules as global variables 
 const router = require('express').Router();
-const { findNoteID, newNote, validateNotes } = require('../../lib/Note');
 const notes = require('../../db/db.json');
+const { findNoteID, newNote, noteCheck, deleteNote } = require('../../lib/notes');
 
-router.get('/Note', (req, res) => {
+// this gets all notes 
+router.get('/notes', (req, res) => {
     res.json(notes);
 });
 
-router.get('/Note/:id', (req, res) => {
+// this gets a single note
+router.get('/notes/:id', (req, res) => {
     const result = findNoteID(req.params.id, notes);
     if (result) {
         res.json(result);
@@ -16,14 +17,24 @@ router.get('/Note/:id', (req, res) => {
     }
 });
 
-router.post('/Note', (req, res) => {
+// this gets a new note 
+router.post('/notes', (req, res) => {
     req.body.id = notes.length.toString();
-    if (!validateNotes(req.body)) {
-        res.status(400).send("This note isn't formatted correctly!");
+    if (!noteCheck(req.body)) {
+        res.status(400).send('You must enter the note correctly!');
     } else {
         const note = newNote(req.body, notes);
         res.json(note);
     }
+});
+
+// this route will delete a note 
+router.delete('/notes/:id', (req, res) => {
+    const result = deleteNote(req.params.id, notes);
+    if (!result) {
+        res.send(404).send('Note not found');
+    }
+    res.sendStatus(204);
 });
 
 module.exports = router;

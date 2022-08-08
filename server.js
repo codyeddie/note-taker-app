@@ -1,22 +1,19 @@
-// declare dependcies as global variables 
-const express = require('express')
+const express = require('express');
 const apiRoutes = require('./routes/apiRoutes');
 const htmlRoutes = require('./routes/htmlRoutes');
 
-// declare port variable 
-const PORT = process.env.PORT || 3001
-
-// declare app as express 
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-// declare routes being used by express 
+// this will have express use the html and api routes 
 app.use('/api', apiRoutes);
 app.use('/', htmlRoutes);
 
+// create the server port 
 app.listen(PORT, () => {
-    console.log(`Now listening at ${PORT}`);
-})
+  console.log(`Now listening at ${PORT}!`);
+});
