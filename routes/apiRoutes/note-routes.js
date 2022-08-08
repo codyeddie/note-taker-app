@@ -1,13 +1,13 @@
 // importing our depencies and needed modules as global variables 
 const router = require('express').Router();
-const { findNoteID, newNote, validateNotes } = require('../../lib/notes');
+const { findNoteID, newNote, validateNotes } = require('../../lib/Note');
 const notes = require('../../db/db.json');
 
-router.get('/notes', (req, res) => {
+router.get('/Note', (req, res) => {
     res.json(notes);
 });
 
-router.get('/notes/:id', (req, res) => {
+router.get('/Note/:id', (req, res) => {
     const result = findNoteID(req.params.id, notes);
     if (result) {
         res.json(result);
@@ -16,11 +16,10 @@ router.get('/notes/:id', (req, res) => {
     }
 });
 
-router.post('/notes', (req, res) => {
-    // set id based on what the next index of the array will be
+router.post('/Note', (req, res) => {
     req.body.id = notes.length.toString();
     if (!validateNotes(req.body)) {
-        res.status(400).send('Note is not properly formatted.');
+        res.status(400).send("This note isn't formatted correctly!");
     } else {
         const note = newNote(req.body, notes);
         res.json(note);
